@@ -1,0 +1,25 @@
+/* Q1: Create a query that lists each movie, the film category it is classified in,
+ and the number of times it has been rented out. */
+
+select f.title film_title, 
+		c.name category_name, 
+		count(r.rental_id) rental_count
+from film f
+join film_category fc
+on f.film_id = fc.film_id 
+join category c
+on fc.category_id = c.category_id
+join inventory i 
+on f.film_id = i.film_id 
+join rental r 
+on i.inventory_id = r.inventory_id
+where c.name in ('Animation', 'Children', 'Classics', 'Comedy', 'Family', 'Music')
+group by 1,2
+order by 2
+
+/* Finish q1 */
+
+/* Q2: Can you provide a table with the movie titles
+ and divide them into 4 levels (first_quarter, second_quarter,
+ third_quarter, and final_quarter) based on the quartiles (25%, 50%, 75%)
+ of the rental duration for movies across all categories? */
